@@ -6,11 +6,13 @@ exports.getAllFavorites = async (req, res) => {
   res.json(favorites);
 };
 
-// GET /api/favorites/user/:userId
+// GET /api/favorites/user
 exports.getFavoritesByUser = async (req, res) => {
-  const favorites = await favoriteService.getFavoritesByUser(req.params.userId);
+  const userId = req.user.id;
+  const favorites = await favoriteService.getFavoritesByUser(userId);
   res.json(favorites);
 };
+
 
 // POST /api/favorites
 exports.addToFavorites = async (req, res) => {

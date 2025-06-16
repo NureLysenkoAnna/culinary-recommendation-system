@@ -13,7 +13,7 @@ const checkRole = require('../middlewares/checkRoleMiddleware');
 
 router.post('/toggle/:recipeId', authMiddleware, checkRole(['user']), toggleFavorite);
 router.get('/', getAllFavorites);
-router.get('/user/:userId',authMiddleware, getFavoritesByUser);
+router.get('/user',authMiddleware, getFavoritesByUser);
 router.post('/', authMiddleware, checkRole(['user','admin', 'moderator']), addToFavorites);
 router.put('/:id', authMiddleware, checkRole(['user','admin', 'moderator']), updateFavorite);
 router.delete('/:id', authMiddleware, checkRole(['user','admin', 'moderator']), deleteFavorite);
