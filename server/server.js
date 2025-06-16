@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 
 // Test route
-app.get('/', (req, res) => {
-  res.send('Сервер працює!');
-});
+//app.get('/', (req, res) => {
+//  res.send('Сервер працює!');
+//});
 
 app.use('/api/auth', authRoutes);
 
