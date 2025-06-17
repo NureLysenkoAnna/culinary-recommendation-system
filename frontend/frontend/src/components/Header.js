@@ -1,14 +1,25 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { isAuthenticated, logout, getCurrentUser } from '../services/authService';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { isAuthenticated, logout } from '../services/authService';
+import { getRandomRecipe } from '../services/recommendationService';
 import '../styles/styles.css';
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = getCurrentUser();
 
   const handleLogout = () => {
     logout();
     navigate('/home');
+  };
+
+  const handleRandomClick = async () => {
+    try {
+      const recipe = await getRandomRecipe();
+      navigate(`/recipe/${recipe._id}`);
+    } catch (error) {
+      alert(
+        error.response?.data?.message || 'Не вдалося отримати випадковий рецепт'
+      );
+    }
   };
 
   return (
@@ -19,15 +30,26 @@ const Header = () => {
           alt="Logo"
           className="logo-img"
         />
-        <span>Culinary Guide</span>
+        <span>Culinario</span>
       </div>
 
       <nav className="nav-links">
         <div className="nav-left">
-            <Link to="/home" className="nav-link">Головна</Link>
+            <NavLink to="/home" className="nav-link">Головна</NavLink>
             {isAuthenticated() && (
-            <Link to="/profile" className="nav-link">Профіль</Link>,
-            <Link to="/profile" className="nav-link">Збережене</Link>
+              <>
+                <NavLink to="/favorites" className="nav-link">Улюблене</NavLink>
+                <NavLink to="/recommended" className="nav-link">Рекомендовані</NavLink>
+                <NavLink to="/by-ingredients" className="nav-link">З того, що є</NavLink>
+                <NavLink to="/profile" className="nav-link">Профіль</NavLink>
+                <img
+                  src="https://i.postimg.cc/VNBKkYQs/random.png"
+                  alt="Випадковий рецепт"
+                  className="dice-image"
+                  onClick={handleRandomClick}
+                  title="Спробувати випадковий рецепт"
+                />
+              </>
             )}
         </div>
 

@@ -10,3 +10,8 @@ export const getUserFavorites = async () => {
   return res.data;
 };
 
+export const deleteFavorite = async (favoriteId) => {
+  const res = await api.delete(`/favorites/${favoriteId}`);
+  return res.data;
+};
+
