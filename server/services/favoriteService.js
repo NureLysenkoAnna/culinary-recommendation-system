@@ -5,7 +5,7 @@ exports.getAllFavorites = async () => {
 };
 
 exports.getFavoritesByUser = async (userId) => {
-  return await Favorite.find({ user: userId }).populate('recipe', 'title');
+  return await Favorite.find({ user: userId }).populate('recipe');
 };
 
 exports.findExistingFavorite = async (userId, recipeId) => {

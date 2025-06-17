@@ -54,6 +54,7 @@ exports.searchRecipes = async (req, res) => {
 exports.filterRecipes = async (req, res) => {
   try {
     const filters = {
+      query: req.query.query,
       cuisine: req.query.cuisine,
       complexity: req.query.complexity,
       minTime: req.query.minTime,

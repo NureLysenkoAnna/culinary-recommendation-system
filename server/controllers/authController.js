@@ -5,6 +5,10 @@ exports.registerUser = async (req, res) => {
     const data = await authService.registerUser(req.body);
     res.status(201).json(data);
   } catch (err) {
+    if (err.message === 'Користувач вже існує') {
+      return res.status(409).json({ message: 'Цей email вже зареєстровано.' });
+    }
+    
     res.status(400).json({ message: 'Помилка реєстрації', error: err.message });
   }
 };

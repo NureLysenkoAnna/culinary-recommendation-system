@@ -4,7 +4,7 @@ const recommendationController = require('../controllers/recommendationControlle
 const authMiddleware = require('../middlewares/authMiddleware');
 const checkRole = require('../middlewares/checkRoleMiddleware');
 
-router.get('/recommendations', authMiddleware, checkRole(['user']), recommendationController.getRecommendations);
+router.get('/', authMiddleware, checkRole(['user']), recommendationController.getRecommendations);
 
 router.get('/random', authMiddleware, checkRole(['user']), recommendationController.getRandomRecipe);
 

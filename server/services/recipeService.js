@@ -37,38 +37,47 @@ exports.searchRecipes = async (query) => {
 };
 
 exports.filterRecipes = async (filters) => {
-  const query = {};
+  const {
+    query,
+    cuisine,
+    complexity,
+    minTime,
+    maxTime,
+    ingredient,
+    sortBy = 'createdAt',
+    order = 'desc'
+  } = filters;
 
-  if (filters.cuisine) {
-    query.cuisine = filters.cuisine;
+  const searchConditions = [];
+
+  if (query) {
+    const regex = new RegExp(query, 'i');
+    searchConditions.push({
+      $or: [
+        { title: regex },
+        
+        { cuisine: regex }
+      ]
+    });
   }
 
-  if (filters.complexity) {
-    query.complexity = filters.complexity;
+  if (cuisine) searchConditions.push({ cuisine });
+  if (complexity) searchConditions.push({ complexity });
+  if (ingredient) searchConditions.push({ ingredients: { $in: [ingredient] } });
+
+  if (minTime || maxTime) {
+    const timeFilter = {};
+    if (minTime) timeFilter.$gte = Number(minTime);
+    if (maxTime) timeFilter.$lte = Number(maxTime);
+    searchConditions.push({ cookingTime: timeFilter });
   }
 
-  if (filters.minTime || filters.maxTime) {
-    query.cookingTime = {};
-    if (filters.minTime) query.cookingTime.$gte = Number(filters.minTime);
-    if (filters.maxTime) query.cookingTime.$lte = Number(filters.maxTime);
-  }
+  const sortOption = {};
+  sortOption[sortBy] = order === 'asc' ? 1 : -1;
 
-  if (filters.ingredient) {
-    query.ingredients = { $in: [new RegExp(filters.ingredient, 'i')] };
-  }
+  const finalQuery = searchConditions.length ? { $and: searchConditions } : {};
 
-  //  сортування
-  const allowedSortFields = ['title', 'cookingTime', 'createdAt', 'complexity', 'cuisine'];
-  const sort = {};
-
-  if (filters.sortBy && allowedSortFields.includes(filters.sortBy)) {
-    sort[filters.sortBy] = filters.order === 'desc' ? -1 : 1;
-  }
-
-  //console.log('QUERY:', query);
-  //console.log('SORT:', sort);
-
-  return await Recipe.find(query).sort(sort);
+  return await Recipe.find(finalQuery).sort(sortOption);
 };
 
 exports.findRecipesByIngredients = async (userIngredients) => {
@@ -110,6 +119,3 @@ exports.findRecipesByIngredients = async (userIngredients) => {
     missingIngredients: r.missingIngredients
   }));
 };
-
-
-
