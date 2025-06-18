@@ -61,8 +61,10 @@ const RecommendedPage = () => {
 
         {!hasPreferences ? (
           <div className="no-preferences">
-            <p>Щоб отримати персональні рекомендації, заповніть свої вподобання у
-                 <span className="link" onClick={() => navigate('/profile')}>профілі</span>.</p>
+            <p>Щоб отримати персональні рекомендації або випадковий рецепт, спочатку заповніть свої вподобання.</p>
+            <button className="go-profile-button" onClick={() => navigate('/profile')}>
+              Перейти до профілю →
+            </button>
           </div>
         ) : recipes.length === 0 ? (
           <p>На жаль, наразі немає рецептів, які відповідали б вашим вподобанням.</p>

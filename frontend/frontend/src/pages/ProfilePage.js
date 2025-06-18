@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, logout } from '../services/authService';
+import { getCurrentUser } from '../services/authService';
 import { getUserPreference } from '../services/preferenceService';
 import Header from '../components/Header';
 import PreferenceForm from '../components/PreferenceForm';
@@ -8,7 +7,6 @@ import PreferenceForm from '../components/PreferenceForm';
 import '../styles/styles.css';
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
   const user = getCurrentUser();
   const [showForm, setShowForm] = useState(false);
   const [preference, setPreference] = useState(null);

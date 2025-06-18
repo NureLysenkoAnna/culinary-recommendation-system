@@ -8,7 +8,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/home');
+    window.location.href = '/home';
   };
 
   const handleRandomClick = async () => {
@@ -16,9 +16,11 @@ const Header = () => {
       const recipe = await getRandomRecipe();
       navigate(`/recipe/${recipe._id}`);
     } catch (error) {
-      alert(
-        error.response?.data?.message || 'Не вдалося отримати випадковий рецепт'
-      );
+      if (error.response?.status === 404) {
+      navigate('/recommended');
+      } else {
+        alert(error.response?.data?.message || 'Не вдалося отримати випадковий рецепт');
+      }
     }
   };
 

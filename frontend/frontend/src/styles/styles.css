@@ -628,4 +628,23 @@ p.error {
   border-radius: 8px;
 }
 
+.no-preferences {
+  text-align: center;
+}
 
+.link {
+  color: #ff7f50;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #f7632e;
+  text-decoration: underline;
+}
+
+.no-favorites-message{
+  text-align: center;
+}

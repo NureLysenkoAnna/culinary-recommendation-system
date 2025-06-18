@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import { getAllRecipes, searchRecipes, filterRecipes } from '../services/recipeService';
+import { getAllRecipes, filterRecipes } from '../services/recipeService';
 import { toggleFavorite } from '../services/favoriteService';
 import useUserFavorites from '../services/useUserFavorites';
 import RecipeSearchFilter from '../components/RecipeSearchFilter';
