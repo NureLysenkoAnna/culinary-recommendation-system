@@ -18,7 +18,7 @@ exports.registerUser = async ({ name, email, password }) => {
   await user.save();
 
   const token = generateToken(user);
-  return { user: { id: user._id, name: user.name }, token };
+  return { user: { id: user._id, name: user.name, email: user.email, }, token };
 };
 
 exports.loginUser = async ({ email, password }) => {
