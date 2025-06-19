@@ -25,6 +25,10 @@ exports.updateUser = async (id, data) => {
   user.email = data.email || user.email;
   user.role = data.role || user.role;
 
+  if (data.password) {
+    user.password = data.password; // захешовано автоматично при save
+  }
+
   await user.save();
   return user;
 };
