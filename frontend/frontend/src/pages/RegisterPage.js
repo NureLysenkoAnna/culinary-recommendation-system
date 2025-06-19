@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import '../styles/styles.css';
 
 const RegisterPage = () => {
@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <div className="login-page">
         <h2>Реєстрація</h2>
         <form onSubmit={handleSubmit} className="form-card">

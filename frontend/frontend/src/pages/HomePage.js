@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import { getAllRecipes, filterRecipes } from '../services/recipeService';
 import { toggleFavorite } from '../services/favoriteService';
 import useUserFavorites from '../services/useUserFavorites';
@@ -57,7 +57,7 @@ const HomePage = () => {
   if (isAuth && favorites === null) {
     return (
       <>
-        <Header />
+        <MainHeader />
         <div className="container">
           <p>Завантаження улюблених рецептів...</p>
         </div>
@@ -67,7 +67,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <RecipeSearchFilter onSearch={handleSearch} />
       <div className="container">
         {!isAuth ? (

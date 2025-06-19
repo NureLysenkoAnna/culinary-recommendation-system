@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserFavorites, deleteFavorite } from '../services/favoriteService';
 import { isAuthenticated, getCurrentUser } from '../services/authService';
 import { filterRecipes } from '../services/recipeService';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import RecipeSearchFilter from '../components/RecipeSearchFilter';
 import '../styles/styles.css';
 
@@ -68,7 +68,7 @@ const FavoritePage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <div className="container">
         <h2>Збережені рецепти</h2>
         <RecipeSearchFilter onSearch={handleSearch} onReset={handleReset} />

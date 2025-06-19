@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import { getUserPreference } from '../services/preferenceService';
 import { getRecommendedRecipes } from '../services/recommendationService';
 import useUserFavorites from '../services/useUserFavorites';
@@ -55,7 +55,7 @@ const RecommendedPage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <div className="container">
         <h2>Рекомендовано для вас</h2>
 

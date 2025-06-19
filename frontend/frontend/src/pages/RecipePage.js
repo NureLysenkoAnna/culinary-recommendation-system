@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getRecipeById } from '../services/recipeService';
 import { toggleFavorite, getUserFavorites } from '../services/favoriteService';
 import { isAuthenticated, getCurrentUser } from '../services/authService';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import '../styles/styles.css';
 
 const RecipePage = () => {
@@ -46,7 +46,7 @@ const RecipePage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
 
       <div className="container">
         <span className="back-inside" onClick={() => navigate(-1)}>

@@ -9,6 +9,8 @@ import RecipePage from './pages/RecipePage';
 import FavoritePage from './pages/FavoritePage';
 import RecommendedPage from './pages/RecommendedPage';
 import IngredientMatchPage from './pages/IngredientMatchPage';
+import ModeratorRecipesPage from './pages/ModeratorRecipesPage';
+import AdminUsersPage from './pages/AdminUsersPage';
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         <Route path="/favorites" element={<FavoritePage />} />
         <Route path="/recommended" element={<RecommendedPage />} />
         <Route path="/by-ingredients" element={<IngredientMatchPage />} />
+        <Route path="/moderator" element={<ModeratorRecipesPage />} />
+        <Route path="/admin" element={<AdminUsersPage />} />
+
         <Route
           path="/profile"
           element={

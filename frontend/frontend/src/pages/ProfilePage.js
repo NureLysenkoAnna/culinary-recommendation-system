@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getCurrentUser } from '../services/authService';
 import { getUserPreference } from '../services/preferenceService';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import PreferenceForm from '../components/PreferenceForm';
 
 import '../styles/styles.css';
@@ -31,7 +31,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <div className="container">
         <h2>Профіль користувача</h2>
         {user ? (

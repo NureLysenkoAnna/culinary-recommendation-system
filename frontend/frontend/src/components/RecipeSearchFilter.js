@@ -83,7 +83,7 @@ const RecipeSearchFilter = ({ onSearch, onReset }) => {
             onChange={(e) => setMaxTime(e.target.value)}
           />
           <input
-            type="text"
+            type="text-ingredient"
             placeholder="Інгредієнт:"
             value={ingredient}
             onChange={(e) => setIngredient(e.target.value)}

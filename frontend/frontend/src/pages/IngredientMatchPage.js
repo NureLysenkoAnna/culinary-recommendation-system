@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { findRecipesByIngredients } from '../services/recipeService';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import '../styles/styles.css';
 
 const IngredientSearchPage = () => {
@@ -36,7 +36,7 @@ const IngredientSearchPage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <div className="container">
         <h2>Знайти рецепт за наявними інгредієнтами</h2>
         <form onSubmit={handleSubmit} className="ingredient-form">
