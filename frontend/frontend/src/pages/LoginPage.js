@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, isAuthenticated } from '../services/authService';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import '../styles/styles.css';
 
 const LoginPage = () => {
@@ -20,7 +20,14 @@ const LoginPage = () => {
     try {
       await login(formData);
       if (isAuthenticated()) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user.role === 'moderator') {
+          navigate('/moderator');
+        } else if (user.role === 'admin'){
+          navigate('/admin');
+        } else {
         navigate('/profile');
+        } 
       }
     } catch (err) {
       setServerError( 'Невірний пароль або пошта!');
@@ -39,7 +46,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <div className="login-page">
         <h2>Вхід до системи</h2>
         <form onSubmit={handleSubmit} className="form-card">

@@ -26,4 +26,19 @@ export const findRecipesByIngredients = async (ingredients) => {
   return res.data;
 };
 
+export const createRecipe = async (data) => {
+  const res = await api.post('/recipes', data);
+  return res.data;
+};
+
+export const updateRecipe = async (id, data) => {
+  const res = await api.put(`/recipes/${id}`, data);
+  return res.data;
+};
+
+export const deleteRecipe = async (id) => {
+  const res = await api.delete(`/recipes/${id}`);
+  return res.data;
+};
+
 
