@@ -8,6 +8,15 @@ exports.getUserById = async (id) => {
   return await User.findById(id).select('-password');
 };
 
+exports.createUser = async ({ name, email, password, role }) => {
+  const existing = await User.findOne({ email });
+  if (existing) throw new Error('Email вже використовується');
+
+  const user = new User({ name, email, password, role });
+  await user.save();
+  return { id: user._id, name: user.name, email: user.email, role: user.role };
+};
+
 exports.updateUser = async (id, data) => {
   const user = await User.findById(id);
   if (!user) return null;

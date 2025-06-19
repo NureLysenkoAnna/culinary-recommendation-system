@@ -13,6 +13,16 @@ exports.getUserById = async (req, res) => {
   res.json(user);
 };
 
+// POST /api/users
+exports.createUser = async (req, res) => {
+  try {
+    const user = await userService.createUser(req.body);
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 // PUT /api/users/:id
 exports.updateUser = async (req, res) => {
   const user = await userService.updateUser(req.params.id, req.body);
