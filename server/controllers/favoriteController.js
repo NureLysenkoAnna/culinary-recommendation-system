@@ -13,7 +13,6 @@ exports.getFavoritesByUser = async (req, res) => {
   res.json(favorites);
 };
 
-
 // POST /api/favorites
 exports.addToFavorites = async (req, res) => {
   try {

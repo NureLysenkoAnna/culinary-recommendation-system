@@ -13,11 +13,6 @@ const authRoutes = require('./routes/authRoutes');
 app.use(cors());
 app.use(express.json());
 
-// Test route
-//app.get('/', (req, res) => {
-//  res.send('Сервер працює!');
-//});
-
 app.use('/api/auth', authRoutes);
 
 const userRoutes = require('./routes/userRoutes');
@@ -35,7 +30,6 @@ app.use('/api/preferences', preferenceRoutes);
 const recommendationRoutes = require('./routes/recommendationRoutes');
 app.use('/api/recommendations', recommendationRoutes);
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Сервер запущено на порту ${PORT}`);
 });

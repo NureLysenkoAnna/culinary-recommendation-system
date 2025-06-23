@@ -17,7 +17,6 @@ router.get('/filter', filterRecipes);
 router.get('/search', searchRecipes);
 router.post('/by-ingredients', getRecipesByIngredients);
 
-// CRUD
 router.get('/', getAllRecipes);
 router.get('/:id', getRecipeById);
 router.post('/', authMiddleware, checkRole(['moderator']), createRecipe);

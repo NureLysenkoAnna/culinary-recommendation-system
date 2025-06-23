@@ -6,7 +6,7 @@ const recipeSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String, // шлях до файлу або URL
+    type: String,
     required: false,
     default: ''
   },
