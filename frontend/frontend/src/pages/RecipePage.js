@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import { getRecipeById } from '../services/recipeService';
 import { toggleFavorite, getUserFavorites } from '../services/favoriteService';
 import { isAuthenticated, getCurrentUser } from '../services/authService';
@@ -18,6 +18,7 @@ const RecipePage = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
+        setIsFavorite(false);
         const data = await getRecipeById(id);
         setRecipe(data);
 

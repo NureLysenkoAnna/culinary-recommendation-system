@@ -143,7 +143,11 @@ const AdminUsersPage = () => {
                       alt="Видалити"
                       title="Видалити"
                       className="action-icon"
-                      onClick={() => handleDelete(u._id)}
+                      onClick={() => {
+                        if (window.confirm('Ви дійсно хочете видалити цього користувача?')) {
+                          handleDelete(u._id);
+                        }  
+                      }}
                     />
                   </td>
                 </tr>
