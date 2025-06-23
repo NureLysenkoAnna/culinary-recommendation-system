@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { findRecipesByIngredients } from '../services/recipeService';
 import MainHeader from '../components/MainHeader';
 import '../styles/styles.css';
@@ -8,6 +9,24 @@ const IngredientSearchPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.fromIngredientSearch) {
+      setInput(location.state.input || '');
+      setRecipes(location.state.recipes || []);
+      setHasSearched(location.state.hasSearched || false);
+    }else {
+      const saved = sessionStorage.getItem('ingredientSearchState');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          setInput(parsed.input || '');
+          setRecipes(parsed.recipes || []);
+          setHasSearched(parsed.hasSearched || false);
+        }
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +49,7 @@ const IngredientSearchPage = () => {
     setInput('');
     setRecipes([]);
     setHasSearched(false);
+    sessionStorage.removeItem('ingredientSearchState');
   };
 
   const hasInputOrResults = input.trim() !== '' || recipes.length > 0;
@@ -47,7 +67,6 @@ const IngredientSearchPage = () => {
                 onChange={(e) => setInput(e.target.value)}
                 className="ingredient-input"
             />
-
             <div className="button-row">
                 <button type="submit" className="search-button">Знайти</button>
                 {hasInputOrResults && (
@@ -64,7 +83,20 @@ const IngredientSearchPage = () => {
 
         <div className="recipe-grid">
           {recipes.map((r) => (
-            <div key={r._id} className="recipe-card">
+            <div key={r._id} className="recipe-card"
+              onClick={() => {
+                sessionStorage.setItem('ingredientSearchState', JSON.stringify({
+                  input,
+                  recipes,
+                  hasSearched
+                }));
+                navigate(`/recipe/${r._id}`, {
+                  state: {
+                    fromIngredientSearch: true
+                  }
+                });
+              }}
+              >
               <img src={r.image} alt={r.title} className="recipe-img" />
               <h3>{r.title}</h3>
               <p>Кухня: {r.cuisine}</p>

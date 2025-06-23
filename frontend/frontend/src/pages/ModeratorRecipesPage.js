@@ -164,7 +164,11 @@ const ModeratorRecipesPage = () => {
                                 alt="Видалити"
                                 title="Видалити"
                                 className="action-icon"
-                                onClick={() => handleDelete(r._id)}
+                                onClick={() => {
+                                  if (window.confirm('Ви дійсно хочете видалити цей рецепт?')) {
+                                    handleDelete(r._id);
+                                  }
+                                }}
                             />
                         </td>
                         </tr>

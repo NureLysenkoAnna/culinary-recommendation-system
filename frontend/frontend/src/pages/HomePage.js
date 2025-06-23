@@ -21,7 +21,6 @@ const HomePage = () => {
     }
   };
 
-  // Завантажити рецепти
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -35,7 +34,6 @@ const HomePage = () => {
     fetchRecipes();
   }, []);
 
-  // Обробка натискання
   const handleToggleFavorite = async (recipeId) => {
     if (!isAuth) return;
 
