@@ -32,11 +32,9 @@ exports.toggleFavorite = async (userId, recipeId) => {
   const existing = await Favorite.findOne({ user: userId, recipe: recipeId });
 
   if (existing) {
-    // Якщо є, видаляємо з улюбленого
     await Favorite.deleteOne({ _id: existing._id });
     return { message: 'Рецепт видалено з улюбленого', isFavorite: false };
   } else {
-    // Якщо немає — додаємо
     const newFavorite = new Favorite({ user: userId, recipe: recipeId });
     await newFavorite.save();
     return { message: 'Рецепт додано до улюбленого', isFavorite: true };

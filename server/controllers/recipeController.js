@@ -64,8 +64,6 @@ exports.filterRecipes = async (req, res) => {
       order: req.query.order
     };
 
-    console.log('REQ.QUERY:', req.query);
-
     const results = await recipeService.filterRecipes(filters);
     res.json(results);
   } catch (err) {
