@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticated, logout } from '../services/authService';
 import { getRandomRecipe } from '../services/recommendationService';
+import { ICONS } from '../config/config';
 import '../styles/styles.css';
 
 const MainHeader = () => {
@@ -28,7 +29,7 @@ const MainHeader = () => {
     <header className="app-header">
       <div className="logo" onClick={() => navigate('/home')}>
         <img
-          src="https://i.postimg.cc/q7jMgfLd/logo.png"
+          src={ICONS.logo}
           alt="Logo"
           className="logo-img"
         />
@@ -45,7 +46,7 @@ const MainHeader = () => {
                 <NavLink to="/by-ingredients" className="nav-link">З того, що є</NavLink>
                 <NavLink to="/profile" className="nav-link">Профіль</NavLink>
                 <img
-                  src="https://i.postimg.cc/VNBKkYQs/random.png"
+                  src={ICONS.random}
                   alt="Випадковий рецепт"
                   className="dice-image"
                   onClick={handleRandomClick}

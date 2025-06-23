@@ -1,4 +1,5 @@
 import { logout, getCurrentUser } from '../services/authService';
+import { ICONS } from '../config/config';
 import '../styles/styles.css';
 
 const SpecificHeader = () => {
@@ -13,7 +14,7 @@ const SpecificHeader = () => {
     <header className="specific-header">
       <div className="logo">
         <img
-          src="https://i.postimg.cc/q7jMgfLd/logo.png"
+          src={ICONS.logo}
           alt="Logo"
           className="logo-img"
         />
