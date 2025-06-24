@@ -5,6 +5,7 @@ import { isAuthenticated, getCurrentUser } from '../services/authService';
 import { filterRecipes } from '../services/recipeService';
 import MainHeader from '../components/MainHeader';
 import RecipeSearchFilter from '../components/RecipeSearchFilter';
+import RecipeCard from '../components/RecipeCard';
 import '../styles/styles.css';
 
 const FavoritePage = () => {
@@ -85,36 +86,21 @@ const FavoritePage = () => {
           isSearching ? (
             <p className="no-favorites-message">😕 Рецепт серед улюблених не знайдено, спробуйте інший запит.</p>
           ) : (
-            <p className="no-favorites-message">У вас ще немає збережених рецептів! Перегляньте <span className="link" onClick={() => navigate('/home')}>усі рецепти</span> і додайте до улюблених.</p>
+            <p className="no-favorites-message">У вас ще немає збережених рецептів! Перегляньте
+             <span className="link" onClick={() => navigate('/home')}>усі рецепти</span> і додайте до улюблених.</p>
           )
         ) : (
           <div className="recipe-grid">
             {sortedRecipes.map((f) => {
               const recipe = f.recipe || f;
               return (
-                <div
-                  className="recipe-card"
+                <RecipeCard
                   key={f._id}
-                  onClick={() => navigate(`/recipe/${recipe._id}`)}
-                >
-                  <img src={recipe.image} alt={recipe.title} className="recipe-img" />
-
-                  <span
-                    className="remove-icon"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemove(f._id);
-                    }}
-                    title="Видалити з улюблених"
-                  >
-                    ✖
-                  </span>
-
-                  <h3>{recipe.title}</h3>
-                  <p>Кухня: {recipe.cuisine}</p>
-                  <p>Час: {recipe.cookingTime} хв</p>
-                  <p>Складність: {recipe.complexity}</p>
-                </div>
+                  recipe={recipe}
+                  isAuth={true}
+                  iconType="remove"
+                  onIconClick={() => handleRemove(f._id)}
+                />
               );
             })}
           </div>

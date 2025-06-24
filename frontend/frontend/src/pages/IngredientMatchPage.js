@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { findRecipesByIngredients } from '../services/recipeService';
 import MainHeader from '../components/MainHeader';
+import RecipeCard from '../components/RecipeCard';
+
 import '../styles/styles.css';
 
 const IngredientSearchPage = () => {
@@ -82,36 +84,32 @@ const IngredientSearchPage = () => {
         )}
 
         <div className="recipe-grid">
-          {recipes.map((r) => (
-            <div key={r._id} className="recipe-card"
-              onClick={() => {
-                sessionStorage.setItem('ingredientSearchState', JSON.stringify({
-                  input,
-                  recipes,
-                  hasSearched
-                }));
-                navigate(`/recipe/${r._id}`, {
-                  state: {
-                    fromIngredientSearch: true
-                  }
-                });
-              }}
-              >
-              <img src={r.image} alt={r.title} className="recipe-img" />
-              <h3>{r.title}</h3>
-              <p>Кухня: {r.cuisine}</p>
-              <p>Час приготування: {r.cookingTime} хв</p>
-              <p>Складність: {r.complexity}</p>
-              <p>
-                Відповідні інгредієнти: {r.matchCount} / {r.ingredients.length}
-              </p>
-              {r.missingIngredients.length > 0 && (
-                <p>
-                  Відсутні інгредієнти: {r.missingIngredients.join(', ')}
-                </p>
-              )}
-            </div>
-          ))}
+            {recipes.map((r) => (
+              <RecipeCard
+                key={r._id}
+                recipe={r}
+                extraInfo={
+                  <>
+                    <p>Відповідні інгредієнти: {r.matchCount} / {r.ingredients.length}</p>
+                    {r.missingIngredients.length > 0 && (
+                      <p>Відсутні інгредієнти: {r.missingIngredients.join(', ')}</p>
+                    )}
+                  </>
+                }
+                onClick={() => {
+                  sessionStorage.setItem('ingredientSearchState', JSON.stringify({
+                    input,
+                    recipes,
+                    hasSearched
+                  }));
+                  navigate(`/recipe/${r._id}`, {
+                    state: {
+                      fromIngredientSearch: true
+                    }
+                  });
+                }}
+              />
+            ))}
         </div>
       </div>
     </>

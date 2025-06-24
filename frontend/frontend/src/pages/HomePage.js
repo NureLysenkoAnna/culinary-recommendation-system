@@ -5,6 +5,7 @@ import { getAllRecipes, filterRecipes } from '../services/recipeService';
 import { toggleFavorite } from '../services/favoriteService';
 import useUserFavorites from '../services/useUserFavorites';
 import RecipeSearchFilter from '../components/RecipeSearchFilter';
+import RecipeCard from '../components/RecipeCard';
 import '../styles/styles.css';
 
 const HomePage = () => {
@@ -78,24 +79,13 @@ const HomePage = () => {
         ) : (
           <div className="recipe-grid">
             {recipes.map((r) => (
-              <div className="recipe-card" key={r._id} onClick={() => navigate(`/recipe/${r._id}`)}>
-                <img src={r.image} alt={r.title} className="recipe-img" />
-                {isAuth && (
-                  <span
-                    className={`heart-icon ${favorites.includes(r._id) ? 'active' : ''}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleFavorite(r._id);
-                    }}
-                  >
-                    ♥
-                  </span>
-                )}
-                <h3>{r.title}</h3>
-                <p>Кухня: {r.cuisine}</p>
-                <p>Час: {r.cookingTime} хв</p>
-                <p>Складність: {r.complexity}</p>
-              </div>
+              <RecipeCard
+                key={r._id}
+                recipe={r}
+                isAuth={isAuth}
+                favorites={favorites}
+                onToggleFavorite={handleToggleFavorite}
+              />
             ))}
           </div>
         )}

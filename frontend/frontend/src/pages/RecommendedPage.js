@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from '../components/MainHeader';
+import RecipeCard from '../components/RecipeCard';
 import { getUserPreference } from '../services/preferenceService';
 import { getRecommendedRecipes } from '../services/recommendationService';
 import useUserFavorites from '../services/useUserFavorites';
@@ -71,31 +72,13 @@ const RecommendedPage = () => {
         ) : (
           <div className="recipe-grid">
             {recipes.map((recipe) => (
-              <div
+              <RecipeCard
                 key={recipe._id}
-                className="recipe-card"
-                onClick={() => navigate(`/recipe/${recipe._id}`)}
-              >
-                <img src={recipe.image} alt={recipe.title} className="recipe-img" />
-
-                {isAuth && (
-                  <span
-                    className={`heart-icon ${favorites.includes(recipe._id) ? 'active' : ''}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleFavorite(recipe._id);
-                    }}
-                    title="Улюблене"
-                  >
-                    ♥
-                  </span>
-                )}
-
-                <h3>{recipe.title}</h3>
-                <p>Кухня: {recipe.cuisine}</p>
-                <p>Час: {recipe.cookingTime} хв</p>
-                <p>Складність: {recipe.complexity}</p>
-              </div>
+                recipe={recipe}
+                isAuth={isAuth}
+                favorites={favorites}
+                onToggleFavorite={handleToggleFavorite}
+              />
             ))}
           </div>
         )}
